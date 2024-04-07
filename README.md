@@ -2,8 +2,8 @@
 
 This image uses Wolfi-OS to create a very small PHP-CS-Fixer Docker image and still glibc, to be used in CI/CD pipelines.
 
-- Official PHP-CS-Fixer image is 100MB and uses Alpine Linux (is musl and does sometimes work **different** than your regular production server / local machine)
-- This image is 41MB and uses Wolfi OS (is glibc and works the same as your regular production server / local machine)
+- Official PHP-CS-Fixer image is 100MB and uses Alpine Linux (is musl and does sometimes work **different** than your local machine)
+- This image is 41MB and uses Wolfi OS (is glibc and works the same as your regular local machine)
 
 ## Usage
 
