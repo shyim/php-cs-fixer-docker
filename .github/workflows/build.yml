@@ -22,6 +22,11 @@ jobs:
       - name: Clone
         uses: actions/checkout@v4
 
+      - name: Install go-task
+        uses: jaxxstorm/action-install-gh-release@v1.10.0
+        with:
+          repo: chainguard-dev/apko
+
       - name: Login into Github Docker Registery
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
@@ -29,7 +34,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_HUB_PAT }}" | docker login -u shyim --password-stdin
 
       - name: Build base and push
-        run: ./build-base.sh
+        run: apko publish wolfi-base.yaml ghcr.io/shyim/php-cs-fixer:base
   cs-fixer:
     needs: [base]
     runs-on: ubuntu-latest
