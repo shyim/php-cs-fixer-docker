@@ -26,7 +26,7 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@v1.10.0
         with:
           repo: chainguard-dev/apko
-          tag: 0.13.2
+          tag: v0.13.2
           binaries-location: apko_0.13.2_linux_amd64
 
       - name: Login into Github Docker Registery
