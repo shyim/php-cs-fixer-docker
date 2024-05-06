@@ -10,7 +10,9 @@ on:
   workflow_dispatch:
 
 permissions:
+  attestations: write
   contents: read
+  id-token: write
   packages: write
 
 jobs:
@@ -49,6 +51,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push
+        id: push
         uses: docker/build-push-action@v5
         with:
           push: true
@@ -60,3 +63,11 @@ jobs:
             shyim/php-cs-fixer:${{ steps.cs_fixer_version.outputs.CS_FIXER_VERSION }}
             ghcr.io/shyim/php-cs-fixer:latest
             ghcr.io/shyim/php-cs-fixer:${{ steps.cs_fixer_version.outputs.CS_FIXER_VERSION }}
+
+      - name: Attest
+        uses: actions/attest-build-provenance@v1
+        id: attest
+        with:
+          subject-name: ghcr.io/shyim/php-cs-fixer
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
